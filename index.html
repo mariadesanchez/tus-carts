@@ -59,6 +59,11 @@
   .perfu .go:active{box-shadow:0 2px 0 #138A62}
   .tecno .go{background:linear-gradient(180deg,#D3C4FF 0%,#9B7BFF 45%,#6E48F0 100%);box-shadow:0 6px 0 #4B2BC4,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.55)}
   .electro .go{background:linear-gradient(180deg,#FFD39A 0%,#FF9A1F 45%,#EE7A00 100%);color:#3A1E00;box-shadow:0 6px 0 #B85E00,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.6)}
+  .apple .go{background:linear-gradient(180deg,#48484A 0%,#2C2C2E 45%,#1D1D1F 100%);box-shadow:0 6px 0 #000,0 16px 24px -12px rgba(0,0,0,.5),inset 0 2px 0 rgba(255,255,255,.25)}
+  .apple .go:active{box-shadow:0 2px 0 #000}
+  .app.apple{background:linear-gradient(180deg,var(--card) 0%,#F2F2F7 100%)}
+  @media (prefers-color-scheme: dark){ .app.apple{background:linear-gradient(180deg,var(--card) 0%,#1C1C1E 100%)} }
+  .badge.nueva{background:#1D1D1F;box-shadow:0 3px 0 #000}
   .app.pronto .go{filter:saturate(.55);opacity:.75;cursor:default;pointer-events:none}
   .badge{display:inline-block;vertical-align:3px;margin-left:6px;background:var(--grape);color:#fff;font-family:Figtree,sans-serif;font-weight:800;font-size:12px;border-radius:999px;padding:3px 9px;box-shadow:0 3px 0 var(--grape-deep);transform:rotate(-2deg)}
 
@@ -96,6 +101,7 @@
     <linearGradient id="g-menta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9FFF0"/><stop offset=".5" stop-color="#5FE3B0"/><stop offset="1" stop-color="#1FA97A"/></linearGradient>
     <linearGradient id="g-violeta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2D8FF"/><stop offset=".5" stop-color="#9B7BFF"/><stop offset="1" stop-color="#6E48F0"/></linearGradient>
     <linearGradient id="g-naranja" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE2B8"/><stop offset=".5" stop-color="#FFA634"/><stop offset="1" stop-color="#EE7A00"/></linearGradient>
+    <linearGradient id="g-plata" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".45" stop-color="#C7C7CC"/><stop offset="1" stop-color="#6E6E73"/></linearGradient>
     <linearGradient id="g-amarillo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFDD0"/><stop offset=".5" stop-color="#FFF01F"/><stop offset="1" stop-color="#E5D400"/></linearGradient>
   </defs>
 </svg>
@@ -134,7 +140,9 @@
     { id: 'perfu', l1: 'Perfu', grad: 'g-menta', nombre: 'Perfu Cart', url: 'https://perfu-cart.vercel.app',
       txt: 'Perfumería, cuidado personal, suplementos y productos de venta libre.', chips: ['Farmacity', 'Farmaonline', 'Simplicity', 'Pigmento', 'GPS Farma'] },
     { id: 'tecno', l1: 'Tecno', grad: 'g-violeta', nombre: 'Tecno Cart', url: 'https://tecno-cart.vercel.app',
-      txt: 'Tecnología y electro en una sola app: celulares, notebooks, TV, heladeras, lavarropas y más, con precio de contado y cuotas.', chips: ['Naldo', 'Cetrogar', 'On City', 'Rodó', 'Samsung', 'Motorola'] },
+      txt: 'Tecnología y electro en una sola app: celulares, notebooks, TV, heladeras, lavarropas y más, con precio de contado y cuotas.', chips: ['Naldo', 'Cetrogar', 'On City', 'Rodó', 'Samsung', 'Motorola', 'iPoint', 'MacStation'] },
+    { id: 'apple', l1: 'Mundo', l2: 'Apple', grad: 'g-plata', nombre: 'Mundo Apple', url: 'https://tecno-cart.vercel.app/?apple=1', nueva: true,
+      txt: 'iPhone, iPad, Mac, AirPods y Apple Watch: el mismo equipo en todas las tiendas, para comprarlo donde sale menos.', chips: ['iPhone', 'iPad', 'MacBook', 'AirPods', 'Apple Watch'] },
   ];
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const flecha = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
@@ -144,12 +152,12 @@
     const t1 = letras.map((c, i) => `<tspan${i ? ` dx="${c === 'f' || letras[i - 1] === 'f' ? 4 : 7}"` : ''} dy="${dy[i] || 0}">${esc(c)}</tspan>`).join('');
     return `<svg class="mini" viewBox="-6 -6 470 236" role="img" aria-label="${esc(a.nombre)}"><g filter="url(#inflate)"><g transform="rotate(-5 150 110)" fill="url(#${a.grad})" stroke="url(#${a.grad})" stroke-width="4" stroke-linejoin="round" paint-order="stroke" font-family="Fredoka, Figtree, sans-serif" font-weight="700" font-size="106">`
       + `<text x="8" y="98" rotate="-7 4 -5 6 -3 5 -4">${t1}</text>`
-      + `<text x="70" y="204" rotate="6 -4 5 -6"><tspan>C</tspan><tspan dx="9" dy="5">a</tspan><tspan dx="9" dy="-6">r</tspan><tspan dx="9" dy="4">t</tspan></text></g></g></svg>`;
+      + `<text x="70" y="204" rotate="6 -4 5 -6">${a.l2 ? Array.from(a.l2).map((c, i) => `<tspan${i ? ' dx="7"' : ''} dy="${[0, 5, -6, 4, -5][i] || 0}">${esc(c)}</tspan>`).join('') : '<tspan>C</tspan><tspan dx="9" dy="5">a</tspan><tspan dx="9" dy="-6">r</tspan><tspan dx="9" dy="4">t</tspan>'}</text></g></g></svg>`;
   };
   document.getElementById('apps').innerHTML = APPS.map(a => `
     <article class="app ${a.id}${a.url ? '' : ' pronto'}">
       ${logo(a)}
-      <h2>${esc(a.nombre)}${a.url ? '' : ' <span class="badge">Próximamente</span>'}</h2>
+      <h2>${esc(a.nombre)}${a.url ? (a.nueva ? ' <span class="badge nueva">Nuevo</span>' : '') : ' <span class="badge">Próximamente</span>'}</h2>
       <p>${esc(a.txt)}</p>
       <div class="chips">${a.chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>
       ${a.url ? `<a class="go" href="${esc(a.url)}" aria-label="Entrar a ${esc(a.nombre)}">Entrar ${flecha}</a>` : `<span class="go" aria-disabled="true">Muy pronto</span>`}
