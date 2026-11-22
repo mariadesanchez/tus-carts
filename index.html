@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFF01F">
+<title>Tus Carts · Tus apps para comprar mejor</title>
+<meta name="description" content="Super Cart, Perfu Cart y muy pronto Tecno Cart y Electro Cart: comparamos precios y ofertas en tiempo real para que compres en el mejor lugar y en el mejor momento.">
+<meta property="og:title" content="Tus Carts · Tus apps para comprar mejor">
+<meta property="og:description" content="No es dónde comprás, es cuándo comprás. Comparamos precios y ofertas en tiempo real.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Figtree:wght@400;600;700;800&family=Fredoka:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF5F9; --card:#ffffff; --ink:#1B2140; --muted:#6C6880; --line:#F6DCE7;
+    --grape:#FF2E7E; --grape-2:#FF9A1F; --grape-deep:#D3125F; --tag:#FFF01F; --tag-deep:#C8BC00; --deco-2:#7FD4FF;
+    --lift:0 1px 0 rgba(27,33,64,.04), 0 10px 24px -14px rgba(27,33,64,.35);
+    --display:"Bricolage Grotesque","Figtree",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#1A0F17; --card:#251722; --ink:#FFF0F6; --muted:#C7A9BA; --line:#3E2434; --grape:#D81F68; --grape-deep:#9E0F48;
+      --lift:0 1px 0 rgba(0,0,0,.2), 0 12px 26px -14px rgba(0,0,0,.7); }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Figtree",system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.45;-webkit-font-smoothing:antialiased}
+  :focus-visible{outline:3px solid var(--tag);outline-offset:3px}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+
+  .ticker{background:var(--tag);color:#1B2140;font-size:13px;font-weight:700;overflow:hidden;white-space:nowrap;padding:8px 0;padding-top:max(8px,env(safe-area-inset-top))}
+  .ticker .run{display:inline-block;animation:run 36s linear infinite}
+  .ticker .run span{margin-right:36px}
+  @keyframes run{to{transform:translateX(-50%)}}
+
+  .hero{background:linear-gradient(160deg,#FF5A9A 0%,var(--grape) 50%,var(--grape-deep) 100%);box-shadow:0 18px 30px -18px rgba(160,10,70,.6);color:#fff;padding:26px 20px 92px;border-radius:0 0 32px 32px;position:relative;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-150px;top:-150px;width:280px;height:280px;border-radius:50%;border:34px solid var(--grape-2);box-shadow:inset 0 -10px 18px rgba(0,0,0,.18),0 14px 24px -10px rgba(0,0,0,.3)}
+  .hero::before{content:"";position:absolute;left:-70px;bottom:-90px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0,var(--deco-2) 38%,#2BA8F0 100%);box-shadow:0 18px 30px -12px rgba(0,0,0,.35)}
+  .hero-in{max-width:980px;margin:0 auto;position:relative;z-index:1}
+  .hero .logo{display:block;width:min(100%,300px);height:auto;overflow:visible;margin-left:-4px}
+  .hero h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,4.4vw,40px);line-height:1.05;letter-spacing:-.02em;margin:10px 0 8px;max-width:18ch}
+  .hero p{margin:0;color:#FFE6F0;font-size:17px;max-width:40ch}
+  .lema{display:inline-block;margin-top:16px;background:var(--tag);color:#1B2140;font-weight:800;border-radius:12px;padding:8px 14px;box-shadow:0 5px 0 var(--tag-deep),0 14px 20px -12px rgba(0,0,0,.45);transform:rotate(-1.5deg)}
+
+  main{max-width:980px;margin:-66px auto 0;padding:0 14px 40px;position:relative;z-index:2}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+  .app{background:var(--card);border-radius:22px;padding:18px 18px 20px;box-shadow:var(--lift);border:2px solid var(--line);border-bottom-width:6px;display:flex;flex-direction:column;gap:10px;position:relative}
+  @media (max-width:520px){ .app .mini{max-width:190px!important} }
+  .app .mini{display:block;width:100%;max-width:250px;height:auto;overflow:visible;margin:-4px 0 2px -4px}
+  .app h2{margin:0;font-family:var(--display);font-size:20px;letter-spacing:-.01em}
+  .app p{margin:0;color:var(--muted);font-size:15px}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .chips span{font-size:12px;font-weight:700;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--ink)}
+  .go{margin-top:auto;appearance:none;border:0;border-radius:16px;padding:15px 14px;font:inherit;font-weight:800;font-size:17px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;transition:transform .08s,box-shadow .08s;cursor:pointer}
+  .go svg{width:20px;height:20px}
+  .go:active{transform:translateY(4px)}
+  .super .go{background:linear-gradient(180deg,#7FD3FF 0%,#36AEFF 45%,#1A8DEB 100%);box-shadow:0 6px 0 #0B6FC4,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.55)}
+  .super .go:active{box-shadow:0 2px 0 #0B6FC4}
+  .perfu .go{background:linear-gradient(180deg,#B9F8DE 0%,#5FE3B0 45%,#1FA97A 100%);color:#0B3B2A;box-shadow:0 6px 0 #138A62,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.6)}
+  .perfu .go:active{box-shadow:0 2px 0 #138A62}
+  .tecno .go{background:linear-gradient(180deg,#D3C4FF 0%,#9B7BFF 45%,#6E48F0 100%);box-shadow:0 6px 0 #4B2BC4,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.55)}
+  .electro .go{background:linear-gradient(180deg,#FFD39A 0%,#FF9A1F 45%,#EE7A00 100%);color:#3A1E00;box-shadow:0 6px 0 #B85E00,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.6)}
+  .app.pronto .go{filter:saturate(.55);opacity:.75;cursor:default;pointer-events:none}
+  .badge{display:inline-block;vertical-align:3px;margin-left:6px;background:var(--grape);color:#fff;font-family:Figtree,sans-serif;font-weight:800;font-size:12px;border-radius:999px;padding:3px 9px;box-shadow:0 3px 0 var(--grape-deep);transform:rotate(-2deg)}
+
+  .why{margin-top:26px;background:var(--card);border-radius:22px;padding:18px 20px;box-shadow:var(--lift);border:2px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+  .why div{display:flex;gap:10px;align-items:flex-start;font-size:15px}
+  .why b{display:block;font-family:var(--display);font-size:16px}
+  .why i{font-style:normal;flex:none;width:34px;height:34px;border-radius:50%;background:var(--tag);display:grid;place-items:center;font-size:18px;box-shadow:0 3px 0 var(--tag-deep)}
+  .why span{color:var(--muted)}
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 30px}
+  footer a{color:inherit}
+</style>
+</head>
+<body>
+<div class="ticker" aria-hidden="true"><div class="run">
+  <span>🛒 Súper: Coto, Carrefour, ChangoMás, Día, Jumbo, Vea y Disco</span><span>💄 Perfumería y farmacia: Farmacity, Farmaonline, Simplicity, Pigmento y GPS Farma</span><span>⏰ No es dónde comprás, es cuándo comprás</span><span>📧 Tu lista con los precios de hoy, todos los días en tu mail</span><span>📱 Pronto: Tecno Cart y Electro Cart</span>
+  <span>🛒 Súper: Coto, Carrefour, ChangoMás, Día, Jumbo, Vea y Disco</span><span>💄 Perfumería y farmacia: Farmacity, Farmaonline, Simplicity, Pigmento y GPS Farma</span><span>⏰ No es dónde comprás, es cuándo comprás</span><span>📧 Tu lista con los precios de hoy, todos los días en tu mail</span><span>📱 Pronto: Tecno Cart y Electro Cart</span>
+</div></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="inflate" x="-12%" y="-15%" width="124%" height="145%" color-interpolation-filters="sRGB">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="7" result="bump"/>
+      <feDiffuseLighting in="bump" surfaceScale="6" diffuseConstant="1" lighting-color="#ffffff" result="diffuse"><feDistantLight azimuth="235" elevation="62"/></feDiffuseLighting>
+      <feComponentTransfer in="diffuse" result="soft"><feFuncR type="linear" slope=".55" intercept=".5"/><feFuncG type="linear" slope=".55" intercept=".5"/><feFuncB type="linear" slope=".55" intercept=".5"/></feComponentTransfer>
+      <feComposite in="soft" in2="SourceAlpha" operator="in" result="softIn"/>
+      <feBlend in="SourceGraphic" in2="softIn" mode="multiply" result="shaded"/>
+      <feSpecularLighting in="bump" surfaceScale="6" specularConstant=".85" specularExponent="34" lighting-color="#ffffff" result="spec"><fePointLight x="70" y="-70" z="170"/></feSpecularLighting>
+      <feComposite in="spec" in2="SourceAlpha" operator="in" result="specIn"/>
+      <feComposite in="shaded" in2="specIn" operator="arithmetic" k1="0" k2="1.05" k3="1" k4="0" result="lit"/>
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6" result="sb"/><feOffset in="sb" dy="9" result="so"/>
+      <feFlood flood-color="#7A0035" flood-opacity=".32"/><feComposite in2="so" operator="in" result="shadow"/>
+      <feMerge><feMergeNode in="shadow"/><feMergeNode in="lit"/></feMerge>
+    </filter>
+    <linearGradient id="g-celeste" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7FD3FF"/><stop offset=".5" stop-color="#36AEFF"/><stop offset="1" stop-color="#1A8DEB"/></linearGradient>
+    <linearGradient id="g-menta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9FFF0"/><stop offset=".5" stop-color="#5FE3B0"/><stop offset="1" stop-color="#1FA97A"/></linearGradient>
+    <linearGradient id="g-violeta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2D8FF"/><stop offset=".5" stop-color="#9B7BFF"/><stop offset="1" stop-color="#6E48F0"/></linearGradient>
+    <linearGradient id="g-naranja" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE2B8"/><stop offset=".5" stop-color="#FFA634"/><stop offset="1" stop-color="#EE7A00"/></linearGradient>
+    <linearGradient id="g-amarillo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFDD0"/><stop offset=".5" stop-color="#FFF01F"/><stop offset="1" stop-color="#E5D400"/></linearGradient>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="hero-in">
+    <svg class="logo" viewBox="-6 -6 300 130" role="img" aria-label="Cart">
+      <g filter="url(#inflate)"><g transform="rotate(-4 140 60)" fill="url(#g-amarillo)" stroke="url(#g-amarillo)" stroke-width="4" stroke-linejoin="round" paint-order="stroke" font-family="Fredoka, Figtree, sans-serif" font-weight="700" font-size="112">
+        <text x="6" y="100" rotate="6 -4 5 -6"><tspan>C</tspan><tspan dx="9" dy="5">a</tspan><tspan dx="9" dy="-6">r</tspan><tspan dx="9" dy="4">t</tspan></text>
+      </g></g>
+    </svg>
+    <h1>Tus apps para comprar mejor</h1>
+    <p>Comparamos precios y ofertas de muchas tiendas en tiempo real. Elegí qué querés comprar hoy.</p>
+    <div class="lema">⏰ No es dónde comprás, es cuándo comprás</div>
+  </div>
+</header>
+
+<main>
+  <div class="grid" id="apps"></div>
+
+  <section class="why" aria-label="Qué hacen las apps">
+    <div><i>🔎</i><p><b>Buscá o escaneá</b><span>Por nombre o con el código de barras, desde el celu.</span></p></div>
+    <div><i>⚖️</i><p><b>Compará en todas</b><span>El precio de cada tienda, con sus ofertas, en un solo lugar.</span></p></div>
+    <div><i>📧</i><p><b>Recibilo en tu mail</b><span>Tu lista con los precios de hoy, o solo cuando algo baja.</span></p></div>
+    <div><i>⏰</i><p><b>Comprá en el momento justo</b><span>Te mostramos el precio más bajo que vimos de cada producto.</span></p></div>
+  </section>
+</main>
+
+<footer>Precios online de cada tienda. Pueden variar en el local. · <a href="https://compras-super-cart.vercel.app/privacidad">Privacidad</a> · <a href="https://compras-super-cart.vercel.app/terminos">Condiciones</a></footer>
+
+<script>
+  // Para habilitar Tecno Cart o Electro Cart: poné su dirección en "url" (y listo, sale el botón activo).
+  const APPS = [
+    { id: 'super', l1: 'Super', grad: 'g-celeste', nombre: 'Super Cart', url: 'https://compras-super-cart.vercel.app',
+      txt: 'Tu compra del súper al mejor precio, con un carrito por cada súper.', chips: ['Coto', 'Carrefour', 'ChangoMás', 'Día', 'Jumbo', 'Vea', 'Disco'] },
+    { id: 'perfu', l1: 'Perfu', grad: 'g-menta', nombre: 'Perfu Cart', url: 'https://perfu-cart.vercel.app',
+      txt: 'Perfumería, cuidado personal, suplementos y productos de venta libre.', chips: ['Farmacity', 'Farmaonline', 'Simplicity', 'Pigmento', 'GPS Farma'] },
+    { id: 'tecno', l1: 'Tecno', grad: 'g-violeta', nombre: 'Tecno Cart', url: '',
+      txt: 'Celulares, notebooks, tablets, gaming y accesorios.', chips: ['Celulares', 'Notebooks', 'Gaming', 'Audio'] },
+    { id: 'electro', l1: 'Electro', grad: 'g-naranja', nombre: 'Electro Cart', url: '',
+      txt: 'Heladeras, lavarropas, aires, TV y pequeños electrodomésticos.', chips: ['Heladeras', 'Lavarropas', 'Aires', 'TV'] },
+  ];
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const flecha = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+  // Mismo logo inflado de las apps: primera palabra arriba, "Cart" abajo
+  const logo = a => {
+    const letras = Array.from(a.l1), dy = [0, -4, 6, -7, 4, -5, 6];
+    const t1 = letras.map((c, i) => `<tspan${i ? ` dx="${c === 'f' || letras[i - 1] === 'f' ? 4 : 7}"` : ''} dy="${dy[i] || 0}">${esc(c)}</tspan>`).join('');
+    return `<svg class="mini" viewBox="-6 -6 470 236" role="img" aria-label="${esc(a.nombre)}"><g filter="url(#inflate)"><g transform="rotate(-5 150 110)" fill="url(#${a.grad})" stroke="url(#${a.grad})" stroke-width="4" stroke-linejoin="round" paint-order="stroke" font-family="Fredoka, Figtree, sans-serif" font-weight="700" font-size="106">`
+      + `<text x="8" y="98" rotate="-7 4 -5 6 -3 5 -4">${t1}</text>`
+      + `<text x="70" y="204" rotate="6 -4 5 -6"><tspan>C</tspan><tspan dx="9" dy="5">a</tspan><tspan dx="9" dy="-6">r</tspan><tspan dx="9" dy="4">t</tspan></text></g></g></svg>`;
+  };
+  document.getElementById('apps').innerHTML = APPS.map(a => `
+    <article class="app ${a.id}${a.url ? '' : ' pronto'}">
+      ${logo(a)}
+      <h2>${esc(a.nombre)}${a.url ? '' : ' <span class="badge">Próximamente</span>'}</h2>
+      <p>${esc(a.txt)}</p>
+      <div class="chips">${a.chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>
+      ${a.url ? `<a class="go" href="${esc(a.url)}" aria-label="Entrar a ${esc(a.nombre)}">Entrar ${flecha}</a>` : `<span class="go" aria-disabled="true">Muy pronto</span>`}
+    </article>`).join('');
+</script>
+</body>
+</html>
