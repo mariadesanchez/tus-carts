@@ -9,7 +9,7 @@
     { id: 'perfu', nombre: 'Perfu Cart', sub: 'Perfumería y farmacia', url: 'https://perfu-cart.vercel.app', color: '#E2367F', ico: '💄' },
     { id: 'tecno', nombre: 'Tecno Cart', sub: 'Tecnología y electro', url: 'https://tecno-cart.vercel.app', color: '#7B5CFF', ico: '📺' },
     { id: 'apple', nombre: 'Mundo Apple', sub: 'iPhone, iPad, Mac, AirPods', url: 'https://tecno-cart.vercel.app/apple', color: '#F0603F', ico: '' },
-    { id: 'juguetes', nombre: 'Juguetes Cart', sub: 'Cebra y Kinderland', url: JYD + '/juguetes', color: '#F28C00', ico: '🧸' },
+    { id: 'juguetes', nombre: 'Juguetes Cart', sub: 'Cebra, Kinderland y LEGO', url: JYD + '/juguetes', color: '#F28C00', ico: '🧸' },
     { id: 'indumentaria', nombre: 'Indumentaria Cart', sub: 'Dexter, Moov, Stock Center, Sporting, Grid', url: JYD + '/indumentaria', color: '#0F9F8F', ico: '👟' },
   ];
   const ETIQUETA = {};
