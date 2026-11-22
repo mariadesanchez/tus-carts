@@ -9,7 +9,7 @@
     { id: 'perfu', nombre: 'Perfu Cart', sub: 'Perfumería y farmacia', url: 'https://perfu-cart.vercel.app', color: '#E2367F', ico: '💄' },
     { id: 'tecno', nombre: 'Tecno Cart', sub: 'Tecnología y electro', url: 'https://tecno-cart.vercel.app', color: '#7B5CFF', ico: '📺' },
     { id: 'apple', nombre: 'Mundo Apple', sub: 'iPhone, iPad, Mac, AirPods', url: 'https://tecno-cart.vercel.app/apple', color: '#F0603F', ico: '' },
-    { id: 'jyd-juguetes', nombre: 'Juguetes', sub: 'Cebra, Kinderland, Frávega', url: JYD + '/?seccion=juguetes', color: '#F28C00', ico: '🧸', sec: 'juguetes' },
+    { id: 'jyd-juguetes', nombre: 'Juguetes', sub: 'Cebra y Kinderland', url: JYD + '/?seccion=juguetes', color: '#F28C00', ico: '🧸', sec: 'juguetes' },
     { id: 'jyd-deporte', nombre: 'Deporte y bicis', sub: 'Dexter, Moov, Stock Center y más', url: JYD + '/?seccion=deporte', color: '#F28C00', ico: '👟', sec: 'deporte' },
   ];
   const ETIQUETA = { 'jyd-juguetes': 'Juguetes y Deporte · Juguetes', 'jyd-deporte': 'Juguetes y Deporte · Deporte' };
