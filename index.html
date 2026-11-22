@@ -141,7 +141,7 @@
       txt: 'Tecnología y electro en una sola app: celulares, notebooks, TV, heladeras, lavarropas y más, con precio de contado y cuotas.', chips: ['Naldo', 'Cetrogar', 'On City', 'Frávega', 'Rodó', 'Samsung', 'Motorola', 'iPoint', 'MacStation'] },
     { id: 'jyd', l1: 'Juguetes', l2: 'Deporte', grad: 'g-naranja', nombre: 'Juguetes y Deporte Cart', url: 'https://juguetes-cart-y-deporte-cart.vercel.app', nueva: true,
       txt: 'Regalos de Navidad al mejor precio: juguetes, zapatillas, ropa deportiva y bicis.', chips: ['Cebra', 'Kinderland', 'Frávega', 'Dexter', 'Moov', 'Stock Center', 'Sporting', 'Grid'] },
-    { id: 'apple', l1: 'Mundo', l2: 'Apple', grad: 'g-plata', nombre: 'Mundo Apple', url: 'https://tecno-cart.vercel.app/?apple=1', nueva: true,
+    { id: 'apple', l1: 'Mundo', l2: 'Apple', grad: 'g-plata', nombre: 'Mundo Apple', url: 'https://tecno-cart.vercel.app/apple', nueva: true,
       txt: 'iPhone, iPad, Mac, AirPods y Apple Watch: el mismo equipo en todas las tiendas, para comprarlo donde sale menos.', chips: ['iPhone', 'iPad', 'MacBook', 'AirPods', 'Apple Watch'] },
   ];
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -163,5 +163,6 @@
       ${a.url ? `<a class="go" href="${esc(a.url)}" aria-label="Entrar a ${esc(a.nombre)}">Entrar ${flecha}</a>` : `<span class="go" aria-disabled="true">Muy pronto</span>`}
     </article>`).join('');
 </script>
+<script src="/nav-carts.js"></script>
 </body>
 </html>
