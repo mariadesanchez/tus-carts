@@ -59,6 +59,8 @@
   .perfu .go:active{box-shadow:0 2px 0 #138A62}
   .tecno .go{background:linear-gradient(180deg,#D3C4FF 0%,#9B7BFF 45%,#6E48F0 100%);box-shadow:0 6px 0 #4B2BC4,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.55)}
   .jyd .go,.electro .go{background:linear-gradient(180deg,#FFD39A 0%,#FF9A1F 45%,#EE7A00 100%);color:#3A1E00;box-shadow:0 6px 0 #B85E00,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.6)}
+  .indumentaria .go{background:linear-gradient(180deg,#B5F5EC 0%,#2FD3C0 45%,#0C8F81 100%);color:#04332E;box-shadow:0 6px 0 #08665C,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.6)}
+  .indumentaria .go:active{box-shadow:0 2px 0 #08665C}
   .apple .go{background:linear-gradient(180deg,#FFC2AE 0%,#FF7A59 45%,#E5432A 100%);box-shadow:0 6px 0 #B52E17,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.55)}
   .apple .go:active{box-shadow:0 2px 0 #B52E17}
   .badge.nueva{background:#FF7A59;box-shadow:0 3px 0 #B52E17}
@@ -99,6 +101,7 @@
     <linearGradient id="g-menta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9FFF0"/><stop offset=".5" stop-color="#5FE3B0"/><stop offset="1" stop-color="#1FA97A"/></linearGradient>
     <linearGradient id="g-violeta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E2D8FF"/><stop offset=".5" stop-color="#9B7BFF"/><stop offset="1" stop-color="#6E48F0"/></linearGradient>
     <linearGradient id="g-naranja" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFE2B8"/><stop offset=".5" stop-color="#FFA634"/><stop offset="1" stop-color="#EE7A00"/></linearGradient>
+    <linearGradient id="g-verde" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D2FBF5"/><stop offset=".5" stop-color="#2FD3C0"/><stop offset="1" stop-color="#0C8F81"/></linearGradient>
     <linearGradient id="g-plata" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFD9CC"/><stop offset=".5" stop-color="#FF7A59"/><stop offset="1" stop-color="#E5432A"/></linearGradient>
     <linearGradient id="g-amarillo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFDD0"/><stop offset=".5" stop-color="#FFF01F"/><stop offset="1" stop-color="#E5D400"/></linearGradient>
   </defs>
@@ -139,8 +142,10 @@
       txt: 'Perfumería, cuidado personal, suplementos y productos de venta libre.', chips: ['Farmacity', 'Farmaonline', 'Simplicity', 'Pigmento', 'GPS Farma'] },
     { id: 'tecno', l1: 'Tecno', grad: 'g-violeta', nombre: 'Tecno Cart', url: 'https://tecno-cart.vercel.app',
       txt: 'Tecnología y electro en una sola app: celulares, notebooks, TV, heladeras, lavarropas y más, con precio de contado y cuotas.', chips: ['Naldo', 'Cetrogar', 'On City', 'Rodó', 'Samsung', 'Motorola', 'iPoint', 'MacStation'] },
-    { id: 'jyd', l1: 'Juguetes', l2: 'Deporte', grad: 'g-naranja', nombre: 'Juguetes y Deporte Cart', url: 'https://juguetes-cart-y-deporte-cart.vercel.app', nueva: true,
-      txt: 'Regalos de Navidad al mejor precio: juguetes, zapatillas, ropa deportiva y bicis.', chips: ['Cebra', 'Kinderland', 'Dexter', 'Moov', 'Stock Center', 'Sporting', 'Grid'] },
+    { id: 'jyd', l1: 'Juguetes', grad: 'g-naranja', nombre: 'Juguetes Cart', url: 'https://juguetes-cart-y-deporte-cart.vercel.app/juguetes', nueva: true,
+      txt: 'Regalos de Navidad al mejor precio: LEGO, Barbie, Hot Wheels, juegos de mesa y más.', chips: ['Cebra', 'Kinderland'] },
+    { id: 'indumentaria', l1: 'Indumentaria', grad: 'g-verde', nombre: 'Indumentaria Cart', url: 'https://juguetes-cart-y-deporte-cart.vercel.app/indumentaria', nueva: true,
+      txt: 'Zapatillas, botines y ropa deportiva: el mismo modelo en todas las tiendas, para comprarlo donde sale menos.', chips: ['Dexter', 'Moov', 'Stock Center', 'Sporting', 'Grid'] },
     { id: 'apple', l1: 'Mundo', l2: 'Apple', grad: 'g-plata', nombre: 'Mundo Apple', url: 'https://tecno-cart.vercel.app/apple', nueva: true,
       txt: 'iPhone, iPad, Mac, AirPods y Apple Watch: el mismo equipo en todas las tiendas, para comprarlo donde sale menos.', chips: ['iPhone', 'iPad', 'MacBook', 'AirPods', 'Apple Watch'] },
   ];
@@ -151,7 +156,7 @@
     const letras = Array.from(a.l1), dy = [0, -4, 6, -7, 4, -5, 6];
     const t1 = letras.map((c, i) => `<tspan${i ? ` dx="${c === 'f' || letras[i - 1] === 'f' ? 4 : 7}"` : ''} dy="${dy[i] || 0}">${esc(c)}</tspan>`).join('');
     return `<svg class="mini" viewBox="-6 -6 470 236" role="img" aria-label="${esc(a.nombre)}"><g filter="url(#inflate)"><g transform="rotate(-5 150 110)" fill="url(#${a.grad})" stroke="url(#${a.grad})" stroke-width="4" stroke-linejoin="round" paint-order="stroke" font-family="Fredoka, Figtree, sans-serif" font-weight="700" font-size="106">`
-      + `<text x="8" y="98" rotate="-7 4 -5 6 -3 5 -4">${t1}</text>`
+      + `<text x="8" y="98" rotate="-7 4 -5 6 -3 5 -4"${letras.length > 9 ? ' font-size="72" textLength="446" lengthAdjust="spacingAndGlyphs"' : ''}>${t1}</text>`
       + `<text x="70" y="204" rotate="6 -4 5 -6">${a.l2 ? Array.from(a.l2).map((c, i) => `<tspan${i ? ' dx="7"' : ''} dy="${[0, 5, -6, 4, -5][i] || 0}">${esc(c)}</tspan>`).join('') : '<tspan>C</tspan><tspan dx="9" dy="5">a</tspan><tspan dx="9" dy="-6">r</tspan><tspan dx="9" dy="4">t</tspan>'}</text></g></g></svg>`;
   };
   document.getElementById('apps').innerHTML = APPS.map(a => `

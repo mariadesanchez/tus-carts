@@ -9,10 +9,10 @@
     { id: 'perfu', nombre: 'Perfu Cart', sub: 'Perfumería y farmacia', url: 'https://perfu-cart.vercel.app', color: '#E2367F', ico: '💄' },
     { id: 'tecno', nombre: 'Tecno Cart', sub: 'Tecnología y electro', url: 'https://tecno-cart.vercel.app', color: '#7B5CFF', ico: '📺' },
     { id: 'apple', nombre: 'Mundo Apple', sub: 'iPhone, iPad, Mac, AirPods', url: 'https://tecno-cart.vercel.app/apple', color: '#F0603F', ico: '' },
-    { id: 'jyd-juguetes', nombre: 'Juguetes', sub: 'Cebra y Kinderland', url: JYD + '/?seccion=juguetes', color: '#F28C00', ico: '🧸', sec: 'juguetes' },
-    { id: 'jyd-deporte', nombre: 'Deporte y bicis', sub: 'Dexter, Moov, Stock Center y más', url: JYD + '/?seccion=deporte', color: '#F28C00', ico: '👟', sec: 'deporte' },
+    { id: 'juguetes', nombre: 'Juguetes Cart', sub: 'Cebra y Kinderland', url: JYD + '/juguetes', color: '#F28C00', ico: '🧸' },
+    { id: 'indumentaria', nombre: 'Indumentaria Cart', sub: 'Dexter, Moov, Stock Center, Sporting, Grid', url: JYD + '/indumentaria', color: '#0F9F8F', ico: '👟' },
   ];
-  const ETIQUETA = { 'jyd-juguetes': 'Juguetes y Deporte · Juguetes', 'jyd-deporte': 'Juguetes y Deporte · Deporte' };
+  const ETIQUETA = {};
 
   // ¿Dónde estoy?
   function detectar() {
@@ -21,7 +21,7 @@
     if (forzado) return forzado;
     if (/perfu-cart/.test(h)) return 'perfu';
     if (/tecno-cart/.test(h)) return (/^\/apple\/?$/.test(p) || qs.get('apple') === '1') ? 'apple' : 'tecno';
-    if (/juguetes-cart/.test(h)) return 'jyd-' + (qs.get('seccion') === 'deporte' ? 'deporte' : 'juguetes');
+    if (/juguetes-cart/.test(h)) return (/^\/indumentaria\/?$/.test(p) || qs.get('seccion') === 'deporte') ? 'indumentaria' : 'juguetes';
     if (/tus-carts/.test(h)) return 'inicio';
     return 'super';
   }
@@ -81,14 +81,6 @@
       li.innerHTML = `<a href="${s.url}" data-id="${s.id}" style="--c:${s.color}"><span class="ic">${icono(s)}</span><span class="tx"><b></b><small></small></span><span class="aca" hidden>Estás acá</span></a>`;
       li.querySelector('b').textContent = s.nombre; li.querySelector('small').textContent = s.sub;
       ul.appendChild(li);
-    });
-    // Dentro de Juguetes y Deporte se cambia de sección sin recargar
-    ul.addEventListener('click', e => {
-      const a = e.target.closest('a[data-id]'); if (!a) return;
-      const s = SECCIONES.find(x => x.id === a.dataset.id);
-      if (s && s.sec && typeof window.tusCartsSeccion === 'function' && /juguetes-cart/.test(location.hostname)) {
-        e.preventDefault(); window.tusCartsSeccion(s.sec); cerrar();
-      }
     });
 
     const btn = bar.querySelector('.tcn-btn'), pill = bar.querySelector('.tcn-pill');
