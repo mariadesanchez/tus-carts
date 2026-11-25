@@ -72,6 +72,17 @@
   .why b{display:block;font-family:var(--display);font-size:16px}
   .why i{font-style:normal;flex:none;width:34px;height:34px;border-radius:50%;background:var(--tag);display:grid;place-items:center;font-size:18px;box-shadow:0 3px 0 var(--tag-deep)}
   .why span{color:var(--muted)}
+  .cuenta{background:var(--card);border-radius:22px;padding:16px 18px;box-shadow:var(--lift);border:2px solid var(--line);margin-bottom:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .cuenta .tx{flex:1;min-width:200px}
+  .cuenta .tx b{display:block;font-family:var(--display);font-size:18px}
+  .cuenta .tx span{color:var(--muted);font-size:14.5px}
+  .cuenta img{width:44px;height:44px;border-radius:50%;flex:none}
+  .gbtn{appearance:none;border:2px solid var(--line);background:#fff;color:#1B2140;border-radius:999px;padding:11px 18px;font:inherit;font-weight:800;font-size:16px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 4px 0 #E3D3DC}
+  .gbtn:disabled{opacity:.6;cursor:default}
+  .gbtn svg{width:20px;height:20px}
+  .salir{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:6px}
+  .cuenta .msg{flex-basis:100%;background:#FFF1D6;color:#5A3A00;border-radius:12px;padding:10px 12px;font-size:14.5px}
+  body.sin-sesion .go{filter:saturate(.75)}
   footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 30px}
   footer a{color:inherit}
 </style>
@@ -121,6 +132,7 @@
 </header>
 
 <main>
+  <section class="cuenta" id="cuenta" aria-live="polite"><div class="tx"><b>Cargando tu cuenta…</b></div></section>
   <div class="grid" id="apps"></div>
 
   <section class="why" aria-label="Qué hacen las apps">
@@ -167,6 +179,78 @@
       <div class="chips">${a.chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>
       ${a.url ? `<a class="go" href="${esc(a.url)}" aria-label="Entrar a ${esc(a.nombre)}">Entrar ${flecha}</a>` : `<span class="go" aria-disabled="true">Muy pronto</span>`}
     </article>`).join('');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.min.js"></script>
+<script>
+  // ---------- Ingreso único: el botón de Gmail está solo acá. Las apps no tienen botón:
+  // si una app no tiene sesión, viene acá con ?ir=<su dirección>; si ya entraste, la devolvemos con ?cuenta=<mail>
+  // y la app entra sola con esa cuenta de Google (sin elegir nada). ?salir=1 cierra la sesión en todas.
+  (function(){
+    const URL_SB = 'https://kjfuhbsnysrpawhegikj.supabase.co', CLAVE = 'sb_publishable_Uxs5cP658Sp2h9PQjwaVjw_0POOgnHm';   // clave pública (la seguridad la dan las reglas RLS)
+    const HOSTS = ['compras-super-cart.vercel.app', 'super-sale-coto.vercel.app', 'perfu-cart.vercel.app', 'tecno-cart.vercel.app', 'juguetes-cart-y-deporte-cart.vercel.app'];
+    const box = document.getElementById('cuenta');
+    const G = '<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>';
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    const q = new URLSearchParams(location.search);
+    let ir = q.get('ir') || '';
+    try { const u = new URL(ir); if (u.protocol !== 'https:' || !HOSTS.includes(u.hostname)) ir = ''; } catch (_) { ir = ''; }
+    let sb = null, user = null;
+    const conCuenta = (url, mail) => { const u = new URL(url); u.searchParams.set('cuenta', mail); return u.toString(); };
+    const limpiar = () => history.replaceState(null, '', location.pathname + (ir ? '?ir=' + encodeURIComponent(ir) : ''));
+
+    function pintar(msg){
+      document.body.classList.toggle('sin-sesion', !user);
+      if (!user) {
+        box.innerHTML = `<div class="tx"><b>Ingresá con tu Gmail</b><span>Una sola vez, acá: después entrás a todas las apps sin volver a ingresar.</span></div>
+          <button type="button" class="gbtn" id="entrarG">${G}Ingresar con Google</button>` + (msg ? `<div class="msg">${msg}</div>` : '');
+        document.getElementById('entrarG').addEventListener('click', () => entrar());
+        return;
+      }
+      const md = user.user_metadata || {}, foto = md.avatar_url || md.picture;
+      box.innerHTML = (foto ? `<img src="${esc(foto)}" alt="" referrerpolicy="no-referrer">` : '')
+        + `<div class="tx"><b>Hola${md.full_name || md.name ? ', ' + esc(String(md.full_name || md.name).split(' ')[0]) : ''}</b><span>Entraste con ${esc(user.email)}. Elegí una app y pasá de una a otra libremente.</span></div>
+          <button type="button" class="salir" id="salirG">Cerrar sesión</button>` + (msg ? `<div class="msg">${msg}</div>` : '');
+      document.getElementById('salirG').addEventListener('click', () => salir(true));
+    }
+    async function entrar(destino){
+      if (!sb) return pintar('No pudimos conectar. Revisá tu conexión y recargá la página.');
+      const b = document.getElementById('entrarG'); if (b) { b.disabled = true; b.lastChild.textContent = 'Ingresando…'; }
+      const d = destino || ir;
+      const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + '/' + (d ? '?ir=' + encodeURIComponent(d) : '') } });
+      if (error) pintar('No se pudo ingresar. Probá de nuevo.');
+    }
+    async function salir(confirmar){
+      if (confirmar && !confirm('¿Cerrar sesión? Se cierra en todas las apps. Tus listas quedan guardadas.')) return;
+      try { await sb.auth.signOut({ scope: 'global' }); } catch (_) { try { await sb.auth.signOut(); } catch (_) {} }
+      user = null; pintar('Cerraste sesión en todas las apps.');
+    }
+    // Las tarjetas de las apps: con sesión, llevan la cuenta; sin sesión, primero se ingresa y después se va a la app
+    document.getElementById('apps').addEventListener('click', e => {
+      const a = e.target.closest('a.go'); if (!a) return;
+      e.preventDefault();
+      if (user) location.href = conCuenta(a.href, user.email); else entrar(a.href);
+    });
+
+    (async () => {
+      try {
+        if (!window.supabase) throw new Error('sin-sdk');
+        sb = window.supabase.createClient(URL_SB, CLAVE, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' } });
+        const codigo = q.get('code');
+        let { data } = await sb.auth.getSession();
+        if (codigo && !(data && data.session)) { const r = await sb.auth.exchangeCodeForSession(codigo); if (r.data && r.data.session) data = { session: r.data.session }; }
+        const errG = q.get('error_description') || q.get('error');
+        if (q.get('salir') === '1') { ir = ''; limpiar(); if (data && data.session) { await salir(false); return; } user = null; return pintar('Cerraste sesión en todas las apps.'); }
+        limpiar();
+        user = data && data.session ? data.session.user : null;
+        if (!user) return pintar(errG ? 'No se pudo completar el ingreso. Probá de nuevo.' : ir ? 'Para entrar a esa app, primero ingresá con tu Gmail.' : '');
+        // Solo entran los mails autorizados
+        const { data: ok, error } = await sb.rpc('es_permitido');
+        if (!error && ok !== true) { const m = user.email; try { await sb.auth.signOut(); } catch (_) {} user = null; return pintar(esc(m) + ' no tiene acceso a Tus Carts. Pedile acceso a quien te compartió las apps.'); }
+        pintar();
+        if (ir) { box.querySelector('.tx span').textContent = 'Entrando a la app…'; location.replace(conCuenta(ir, user.email)); }
+      } catch (_) { pintar('No pudimos conectar. Revisá tu conexión y recargá la página.'); }
+    })();
+  })();
 </script>
 <script src="/nav-carts.js"></script>
 </body>
