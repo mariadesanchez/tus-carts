@@ -158,7 +158,7 @@
       txt: 'Regalos de Navidad al mejor precio: LEGO, Barbie, Hot Wheels, juegos de mesa y más.', chips: ['Cebra', 'Kinderland', 'Brickstore (LEGO)'] },
     { id: 'indumentaria', l1: 'Indumentaria', grad: 'g-verde', nombre: 'Indumentaria Cart', url: 'https://juguetes-cart-y-deporte-cart.vercel.app/indumentaria', nueva: true,
       txt: 'Zapatillas, botines y ropa deportiva: el mismo modelo en todas las tiendas, para comprarlo donde sale menos.', chips: ['Dexter', 'Moov', 'Stock Center', 'Sporting', 'Grid'] },
-    { id: 'apple', l1: 'Mundo', l2: 'Apple', grad: 'g-plata', nombre: 'Mundo Apple', url: 'https://tecno-cart.vercel.app/apple', nueva: true,
+    { id: 'apple', l1: 'Apple', grad: 'g-plata', nombre: 'Apple Cart', url: 'https://tecno-cart.vercel.app/apple', nueva: true,
       txt: 'iPhone, iPad, Mac, AirPods y Apple Watch: el mismo equipo en todas las tiendas, para comprarlo donde sale menos.', chips: ['iPhone', 'iPad', 'MacBook', 'AirPods', 'Apple Watch'] },
   ];
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -169,7 +169,7 @@
     const t1 = letras.map((c, i) => `<tspan${i ? ` dx="${c === 'f' || letras[i - 1] === 'f' ? 4 : 7}"` : ''} dy="${dy[i] || 0}">${esc(c)}</tspan>`).join('');
     return `<svg class="mini" viewBox="-6 -6 470 236" role="img" aria-label="${esc(a.nombre)}"><g filter="url(#inflate)"><g transform="rotate(-5 150 110)" fill="url(#${a.grad})" stroke="url(#${a.grad})" stroke-width="4" stroke-linejoin="round" paint-order="stroke" font-family="Fredoka, Figtree, sans-serif" font-weight="700" font-size="106">`
       + `<text x="8" y="98" rotate="-7 4 -5 6 -3 5 -4"${letras.length > 9 ? ' font-size="72" textLength="446" lengthAdjust="spacingAndGlyphs"' : ''}>${t1}</text>`
-      + `<text x="70" y="204" rotate="6 -4 5 -6">${a.l2 ? Array.from(a.l2).map((c, i) => `<tspan${i ? ' dx="7"' : ''} dy="${[0, 5, -6, 4, -5][i] || 0}">${esc(c)}</tspan>`).join('') : '<tspan>C</tspan><tspan dx="9" dy="5">a</tspan><tspan dx="9" dy="-6">r</tspan><tspan dx="9" dy="4">t</tspan>'}</text></g></g></svg>`;
+      + `<text x="70" y="204" rotate="6 -4 5 -6">${a.l2 ? Array.from(a.l2).map((c, i) => `<tspan${i ? ' dx="7"' : ''} dy="${[0, 5, -6, 4, -5][i] || 0}">${esc(c)}</tspan>`).join('') : '<tspan>C</tspan><tspan dx="9" dy="5">a</tspan><tspan dx="9" dy="-6">r</tspan><tspan dx="9" dy="4">t</tspan>'}</text><g transform="translate(334 108) scale(1.7)" fill="none" stroke="url(#${a.grad})" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h10l8 34h34l7-24H16"/><path d="M22 30h33" stroke-width="5" opacity=".7"/><circle cx="25" cy="53" r="5" fill="url(#${a.grad})"/><circle cx="49" cy="53" r="5" fill="url(#${a.grad})"/></g></g></g></svg>`;
   };
   document.getElementById('apps').innerHTML = APPS.map(a => `
     <article class="app ${a.id}${a.url ? '' : ' pronto'}">
