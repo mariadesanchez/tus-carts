@@ -32,6 +32,7 @@
   .tcn-btn{appearance:none;border:2px solid rgba(255,255,255,.7);background:rgba(30,20,50,.38);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:#fff;
     width:40px;height:40px;border-radius:999px;display:grid;place-items:center;cursor:pointer;flex:none;box-shadow:0 6px 16px -8px rgba(0,0,0,.6);padding:0}
   .tcn-btn svg{width:20px;height:20px;stroke:currentColor;stroke-width:2.4;fill:none;stroke-linecap:round}
+  .tcn-pill{display:none!important}   /* solo el menú hamburguesa: la sección actual se ve en el menú */
   .tcn-pill{display:flex;align-items:center;gap:6px;min-width:0;border:2px solid rgba(255,255,255,.7);background:rgba(30,20,50,.38);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
     color:#fff;border-radius:999px;padding:5px 12px 5px 6px;font:800 13px/1.1 Figtree,system-ui,sans-serif;cursor:pointer;box-shadow:0 6px 16px -8px rgba(0,0,0,.6)}
   .tcn-pill i{width:22px;height:22px;border-radius:999px;display:grid;place-items:center;font-style:normal;font-size:13px;flex:none}
