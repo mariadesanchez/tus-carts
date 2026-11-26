@@ -211,7 +211,7 @@
       if (!user) {
         box.innerHTML = `<div class="cu-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg></div>
           <div class="tx"><b>Iniciá sesión</b><span>Con tu cuenta de Google entrás a todas las apps.</span></div>
-          <button type="button" class="gbtn" id="entrarG">${G}<span>Continuar con Google</span></button>` + (msg ? `<div class="msg">${msg}</div>` : '');
+          <button type="button" class="gbtn" id="entrarG" aria-label="Login con Google">${G}<span>Login</span></button>` + (msg ? `<div class="msg">${msg}</div>` : '');
         document.getElementById('entrarG').addEventListener('click', () => entrar());
         return;
       }
