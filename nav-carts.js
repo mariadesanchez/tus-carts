@@ -57,6 +57,9 @@
   .tcn-list .tx small{display:block;color:#6B6480;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .tcn-list .aca{font-size:11px;font-weight:800;color:var(--c);text-transform:uppercase;letter-spacing:.04em;flex:none}
   .tcn-grupo{font-size:11px;font-weight:800;color:#8A84A0;text-transform:uppercase;letter-spacing:.06em;padding:12px 10px 4px}
+  .tcn-salir{display:flex;align-items:center;gap:10px;width:calc(100% - 24px);margin:14px 12px 18px;padding:12px 14px;border:0;border-radius:14px;background:#FCE4EA;color:#C2334D;font:inherit;font-weight:800;font-size:15px;cursor:pointer}
+  .tcn-salir svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .tcn-salir[hidden]{display:none}
   @media (prefers-reduced-motion:reduce){.tcn-panel,.tcn-back{transition:none}}`;
 
   const manzana = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#fff" d="M16.4 12.6c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.9-3.6 2.2-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7c1.2 0 1.9-1.1 2.6-2.1.8-1.2 1.2-2.3 1.2-2.4 0 0-2.2-.9-2.2-3.4zM14.3 6.1c.6-.7 1-1.7.9-2.6-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.5 1 .1 1.9-.5 2.5-1.2z"/></svg>';
@@ -70,7 +73,8 @@
       + '<button type="button" class="tcn-pill" aria-label="Sección actual"><i></i><span><small>Estás en</small><b></b></span></button>';
     const back = document.createElement('div'); back.className = 'tcn-back';
     const panel = document.createElement('nav'); panel.className = 'tcn-panel'; panel.setAttribute('aria-label', 'Secciones'); panel.setAttribute('aria-hidden', 'true');
-    panel.innerHTML = '<div class="tcn-head"><b>Tus Carts</b><button type="button" class="tcn-x" aria-label="Cerrar">×</button></div><ul class="tcn-list"></ul>';
+    panel.innerHTML = '<div class="tcn-head"><b>Tus Carts</b><button type="button" class="tcn-x" aria-label="Cerrar">×</button></div><ul class="tcn-list"></ul>'
+      + '<button type="button" class="tcn-salir" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4"/><path d="M10 16l-4-4 4-4M6 12h10"/></svg>Cerrar sesión</button>';
     // Fuera del <body>: algunas apps ocultan todo el body menos el encabezado mientras no iniciaste sesión
     const raiz = document.createElement('div'); raiz.id = 'tcn'; raiz.append(bar, back, panel);
     document.documentElement.appendChild(raiz);
@@ -85,7 +89,10 @@
     });
 
     const btn = bar.querySelector('.tcn-btn'), pill = bar.querySelector('.tcn-pill');
-    function abrir() { panel.classList.add('on'); back.classList.add('on'); panel.setAttribute('aria-hidden', 'false'); btn.setAttribute('aria-expanded', 'true'); setTimeout(() => panel.querySelector('a.on, a').focus(), 50); }
+    // "Cerrar sesión": cada app (y el inicio) deja en window.tusCartsSalir cómo cerrar la sesión mientras hay una abierta
+    const salirBtn = panel.querySelector('.tcn-salir');
+    salirBtn.addEventListener('click', () => { cerrar(); if (typeof window.tusCartsSalir === 'function') window.tusCartsSalir(); });
+    function abrir() { salirBtn.hidden = typeof window.tusCartsSalir !== 'function'; panel.classList.add('on'); back.classList.add('on'); panel.setAttribute('aria-hidden', 'false'); btn.setAttribute('aria-expanded', 'true'); setTimeout(() => panel.querySelector('a.on, a').focus(), 50); }
     function cerrar() { panel.classList.remove('on'); back.classList.remove('on'); panel.setAttribute('aria-hidden', 'true'); btn.setAttribute('aria-expanded', 'false'); }
     btn.addEventListener('click', abrir); pill.addEventListener('click', abrir);
     back.addEventListener('click', cerrar); panel.querySelector('.tcn-x').addEventListener('click', cerrar);

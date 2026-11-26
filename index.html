@@ -200,6 +200,7 @@
 
     function pintar(msg){
       document.body.classList.toggle('sin-sesion', !user);
+      window.tusCartsSalir = user ? () => salir(true) : null;
       if (!user) {
         box.innerHTML = `<div class="tx"><b>Ingresá con tu Gmail</b><span>Una sola vez, acá: después entrás a todas las apps sin volver a ingresar.</span></div>
           <button type="button" class="gbtn" id="entrarG">${G}Ingresar con Google</button>` + (msg ? `<div class="msg">${msg}</div>` : '');
