@@ -72,16 +72,23 @@
   .why b{display:block;font-family:var(--display);font-size:16px}
   .why i{font-style:normal;flex:none;width:34px;height:34px;border-radius:50%;background:var(--tag);display:grid;place-items:center;font-size:18px;box-shadow:0 3px 0 var(--tag-deep)}
   .why span{color:var(--muted)}
-  .cuenta{background:var(--card);border-radius:22px;padding:16px 18px;box-shadow:var(--lift);border:2px solid var(--line);margin-bottom:16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  /* Ingreso: tarjeta limpia y profesional */
+  .cuenta{background:var(--card);border-radius:20px;padding:18px 20px;box-shadow:0 18px 40px -22px rgba(90,20,60,.45);border:1px solid color-mix(in srgb, var(--line) 70%, transparent);margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .cu-ic{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;background:linear-gradient(145deg,#FF6FA5,#D3125F);box-shadow:0 8px 18px -10px rgba(211,18,95,.8)}
+  .cu-ic svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
   .cuenta .tx{flex:1;min-width:200px}
-  .cuenta .tx b{display:block;font-family:var(--display);font-size:18px}
-  .cuenta .tx span{color:var(--muted);font-size:14.5px}
-  .cuenta img{width:44px;height:44px;border-radius:50%;flex:none}
-  .gbtn{appearance:none;border:2px solid var(--line);background:#fff;color:#1B2140;border-radius:999px;padding:11px 18px;font:inherit;font-weight:800;font-size:16px;display:inline-flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 4px 0 #E3D3DC}
-  .gbtn:disabled{opacity:.6;cursor:default}
+  .cuenta .tx b{display:block;font-family:var(--display);font-size:19px;letter-spacing:-.01em}
+  .cuenta .tx span{display:block;color:var(--muted);font-size:14px;margin-top:2px}
+  .cuenta img{width:46px;height:46px;border-radius:50%;flex:none;box-shadow:0 0 0 3px #fff, 0 0 0 5px #FFD1E3}
+  .gbtn{appearance:none;border:1px solid #DADCE0;background:#fff;color:#1F1F1F;border-radius:12px;padding:12px 20px;font:inherit;font-weight:700;font-size:15.5px;display:inline-flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;box-shadow:0 1px 2px rgba(60,64,67,.25),0 2px 8px -2px rgba(60,64,67,.18);transition:box-shadow .15s,transform .15s}
+  .gbtn:hover{box-shadow:0 2px 4px rgba(60,64,67,.3),0 6px 14px -4px rgba(60,64,67,.25);transform:translateY(-1px)}
+  .gbtn:disabled{opacity:.6;cursor:default;transform:none}
   .gbtn svg{width:20px;height:20px}
-  .salir{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer;padding:6px}
-  .cuenta .msg{flex-basis:100%;background:#FFF1D6;color:#5A3A00;border-radius:12px;padding:10px 12px;font-size:14.5px}
+  .salir{appearance:none;border:1px solid var(--line);background:none;color:var(--muted);font:inherit;font-weight:700;font-size:14px;border-radius:10px;cursor:pointer;padding:8px 14px}
+  .salir:hover{color:#C2334D;border-color:#F3C2CF;background:#FFF5F8}
+  .cuenta .msg{flex-basis:100%;display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13.5px;margin:-4px 0 0 64px}
+  .cuenta .msg::before{content:"";width:8px;height:8px;border-radius:50%;background:#F2A33A;flex:none}
+  @media (max-width:560px){ .cuenta .gbtn{width:100%} .cuenta .msg{margin-left:0} }
   body.sin-sesion .go{filter:saturate(.75)}
   footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 30px}
   footer a{color:inherit}
@@ -202,20 +209,21 @@
       document.body.classList.toggle('sin-sesion', !user);
       window.tusCartsSalir = user ? () => salir(true) : null;
       if (!user) {
-        box.innerHTML = `<div class="tx"><b>Ingresá con tu Gmail</b><span>Una sola vez, acá: después entrás a todas las apps sin volver a ingresar.</span></div>
-          <button type="button" class="gbtn" id="entrarG">${G}Ingresar con Google</button>` + (msg ? `<div class="msg">${msg}</div>` : '');
+        box.innerHTML = `<div class="cu-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></svg></div>
+          <div class="tx"><b>Iniciá sesión</b><span>Con tu cuenta de Google entrás a todas las apps.</span></div>
+          <button type="button" class="gbtn" id="entrarG">${G}<span>Continuar con Google</span></button>` + (msg ? `<div class="msg">${msg}</div>` : '');
         document.getElementById('entrarG').addEventListener('click', () => entrar());
         return;
       }
       const md = user.user_metadata || {}, foto = md.avatar_url || md.picture;
       box.innerHTML = (foto ? `<img src="${esc(foto)}" alt="" referrerpolicy="no-referrer">` : '')
-        + `<div class="tx"><b>Hola${md.full_name || md.name ? ', ' + esc(String(md.full_name || md.name).split(' ')[0]) : ''}</b><span>Entraste con ${esc(user.email)}. Elegí una app y pasá de una a otra libremente.</span></div>
+        + `<div class="tx"><b>Hola${md.full_name || md.name ? ', ' + esc(String(md.full_name || md.name).split(' ')[0]) : ''}</b><span>${esc(user.email)}</span></div>
           <button type="button" class="salir" id="salirG">Cerrar sesión</button>` + (msg ? `<div class="msg">${msg}</div>` : '');
       document.getElementById('salirG').addEventListener('click', () => salir(true));
     }
     async function entrar(destino){
       if (!sb) return pintar('No pudimos conectar. Revisá tu conexión y recargá la página.');
-      const b = document.getElementById('entrarG'); if (b) { b.disabled = true; b.lastChild.textContent = 'Ingresando…'; }
+      const b = document.getElementById('entrarG'); if (b) { b.disabled = true; b.querySelector('span').textContent = 'Ingresando…'; }
       const d = destino || ir;
       const { error } = await sb.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + '/' + (d ? '?ir=' + encodeURIComponent(d) : '') } });
       if (error) pintar('No se pudo ingresar. Probá de nuevo.');
