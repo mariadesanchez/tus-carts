@@ -51,7 +51,9 @@
   .tcn-list a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;text-decoration:none;color:inherit;border:2px solid transparent}
   .tcn-list a:hover{background:#F6F3FC}
   .tcn-list a.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,#fff)}
-  .tcn-list .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:20px;flex:none;background:var(--c);color:#fff;box-shadow:0 3px 0 color-mix(in srgb,var(--c) 70%,#000)}
+  .tcn-list .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none;background:#F4F1F6;color:#2B2540;border:1.5px solid #E7E1EA;border-bottom:3px solid color-mix(in srgb,var(--c) 55%,#E7E1EA)}
+  .tcn-list .ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .tcn-pill i svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .tcn-list .tx{min-width:0;flex:1}
   .tcn-list .tx b{display:block;font-size:16px}
   .tcn-list .tx small{display:block;color:#6B6480;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -62,8 +64,17 @@
   .tcn-salir[hidden]{display:none}
   @media (prefers-reduced-motion:reduce){.tcn-panel,.tcn-back{transition:none}}`;
 
-  const manzana = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="#fff" d="M16.4 12.6c0-2.2 1.8-3.3 1.9-3.4-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.6.8-3.3.8-.7 0-1.7-.8-2.8-.8-1.5 0-2.8.9-3.6 2.2-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.2 1.1 0 1.5-.7 2.8-.7s1.7.7 2.8.7c1.2 0 1.9-1.1 2.6-2.1.8-1.2 1.2-2.3 1.2-2.4 0 0-2.2-.9-2.2-3.4zM14.3 6.1c.6-.7 1-1.7.9-2.6-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.5 1 .1 1.9-.5 2.5-1.2z"/></svg>';
-  const icono = s => s.id === 'apple' ? manzana : s.ico;
+  // Íconos de línea, sobrios (sin emojis ni logos de marcas): una figura que identifica cada página
+  const ICOS = {
+    inicio: '<path d="M3.5 11 12 4l8.5 7"/><path d="M5.5 9.5V20h13V9.5"/><path d="M10 20v-5.5h4V20"/>',
+    super: '<path d="M2.5 4h2.6l2.3 10.5a1.6 1.6 0 0 0 1.6 1.3h8.3a1.6 1.6 0 0 0 1.6-1.2L20.8 7.5H6"/><path d="M8.6 10.8h11.1M10.5 7.5l.8 8.3M14.4 7.5l-.3 8.3M18.2 7.5l-1.3 8.3"/><circle cx="9.8" cy="19.6" r="1.5"/><circle cx="17" cy="19.6" r="1.5"/>',
+    perfu: '<path d="M10 3.5h4v3h-4z"/><path d="M12 3.5V2"/><path d="M14 4.5h2.5"/><path d="M8.5 6.5h7"/><rect x="5.5" y="8.5" width="13" height="12.5" rx="3"/><path d="M9 13.5c1.8-1.6 4.2-1.6 6 0"/>',
+    tecno: '<rect x="2.5" y="4" width="19" height="12.5" rx="1.8"/><path d="M9 20.5h6M12 16.5v4"/><path d="M5.5 7v6.5"/>',
+    apple: '<rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.5 4.6h3"/><path d="M11 18.8h2"/>',
+    juguetes: '<circle cx="7" cy="6" r="2.4"/><circle cx="17" cy="6" r="2.4"/><circle cx="12" cy="10" r="5"/><path d="M10.4 9.3h.01M13.6 9.3h.01"/><path d="M10.8 12.1c.7.6 1.7.6 2.4 0"/><path d="M8.2 13.6c-2.4 1.2-3.7 3.4-3.7 5.9h15c0-2.5-1.3-4.7-3.7-5.9"/>',
+    indumentaria: '<path d="M2.5 16.5c0-3 .8-6.5 2.2-8.5l2.6 1.6c1.2.8 2.6.4 3.3-.8l.5-.8c3 3.6 6.6 5.3 10.4 6 .5 1 .5 2.3 0 3.5H4.3c-1 0-1.8-.4-1.8-1z"/><path d="M2.5 15.5h19"/><path d="M10 10.8l1.3-1M12.4 12.3l1.3-1M14.9 13.5l1.2-1"/><path d="M5 19.5h15"/>'
+  };
+  const icono = s => '<svg viewBox="0 0 24 24" aria-hidden="true">' + (ICOS[s.id] || ICOS.inicio) + '</svg>';
 
   function armar() {
     const st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
