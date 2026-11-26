@@ -40,7 +40,7 @@
   .tcn-pill small{display:block;font-weight:600;font-size:10px;opacity:.8;letter-spacing:.04em;text-transform:uppercase}
   .tcn-back{position:fixed;inset:0;z-index:95;background:rgba(20,14,35,.45);opacity:0;pointer-events:none;transition:opacity .2s}
   .tcn-back.on{opacity:1;pointer-events:auto}
-  .tcn-panel{position:fixed;top:0;bottom:0;left:0;z-index:96;width:min(320px,86vw);background:#fff;color:#1B1530;transform:translateX(-102%);transition:transform .22s ease;
+  .tcn-panel{position:fixed;top:0;bottom:0;left:0;z-index:96;width:min(320px,86vw);background:#F7F1F6;color:#1B1530;transform:translateX(-102%);transition:transform .22s ease;
     display:flex;flex-direction:column;box-shadow:12px 0 40px -12px rgba(0,0,0,.4);font-family:Figtree,system-ui,sans-serif;padding-top:env(safe-area-inset-top)}
   .tcn-panel.on{transform:none}
   .tcn-head{display:flex;align-items:center;justify-content:space-between;padding:18px 16px 10px}
@@ -48,7 +48,7 @@
   .tcn-x{appearance:none;border:0;background:#F2EFF8;width:36px;height:36px;border-radius:999px;font-size:20px;cursor:pointer;color:#1B1530}
   .tcn-list{list-style:none;margin:0;padding:4px 10px 24px;overflow:auto}
   .tcn-list li{margin:0 0 6px}
-  .tcn-list a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;text-decoration:none;color:inherit;border:2px solid transparent}
+  .tcn-list a{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;text-decoration:none;color:inherit;border:2px solid transparent;background:#fff;box-shadow:0 4px 12px -8px rgba(60,20,60,.35);margin-bottom:8px}
   .tcn-list a:hover{background:#F6F3FC}
   .tcn-list a.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,#fff)}
   .tcn-list .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none;background:#F4F1F6;color:#2B2540;border:1.5px solid #E7E1EA;border-bottom:3px solid color-mix(in srgb,var(--c) 55%,#E7E1EA)}
@@ -58,7 +58,7 @@
   .tcn-list .tx b{display:block;font-size:16px}
   .tcn-list .tx small{display:block;color:#6B6480;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .tcn-list .aca{font-size:11px;font-weight:800;color:var(--c);text-transform:uppercase;letter-spacing:.04em;flex:none}
-  .tcn-grupo{font-size:11px;font-weight:800;color:#8A84A0;text-transform:uppercase;letter-spacing:.06em;padding:12px 10px 4px}
+  .tcn-grupo{height:0;border-top:1.5px solid #E4D8E2;margin:6px 6px 14px;padding:0;list-style:none}
   .tcn-salir{display:flex;align-items:center;gap:10px;width:calc(100% - 24px);margin:14px 12px 18px;padding:12px 14px;border:0;border-radius:14px;background:#FCE4EA;color:#C2334D;font:inherit;font-weight:800;font-size:15px;cursor:pointer}
   .tcn-salir svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
   .tcn-salir[hidden]{display:none}
@@ -92,7 +92,7 @@
 
     const ul = panel.querySelector('ul');
     SECCIONES.forEach((s, i) => {
-      if (i === 1) { const g = document.createElement('li'); g.className = 'tcn-grupo'; g.textContent = 'Secciones'; ul.appendChild(g); }
+      if (i === 1) { const g = document.createElement('li'); g.className = 'tcn-grupo'; g.setAttribute('role', 'separator'); ul.appendChild(g); }
       const li = document.createElement('li');
       li.innerHTML = `<a href="${s.url}" data-id="${s.id}" style="--c:${s.color}"><span class="ic">${icono(s)}</span><span class="tx"><b></b><small></small></span><span class="aca" hidden>Estás acá</span></a>`;
       li.querySelector('b').textContent = s.nombre; li.querySelector('small').textContent = s.sub;
