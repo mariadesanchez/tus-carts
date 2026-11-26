@@ -43,28 +43,15 @@
 
   main{max-width:980px;margin:-66px auto 0;padding:0 14px 40px;position:relative;z-index:2}
   .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-  .app{background:var(--card);border-radius:22px;padding:18px 18px 20px;box-shadow:var(--lift);border:2px solid var(--line);border-bottom-width:6px;display:flex;flex-direction:column;gap:10px;position:relative}
-  @media (max-width:520px){ .app .mini{max-width:190px!important} }
-  .app .mini{display:block;width:100%;max-width:250px;height:auto;overflow:visible;margin:-4px 0 2px -4px}
-  .app h2{margin:0;font-family:var(--display);font-size:20px;letter-spacing:-.01em}
-  .app p{margin:0;color:var(--muted);font-size:15px}
-  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-  .chips span{font-size:12px;font-weight:700;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:3px 9px;color:var(--ink)}
-  .go{margin-top:auto;appearance:none;border:0;border-radius:16px;padding:15px 14px;font:inherit;font-weight:800;font-size:17px;text-align:center;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;color:#fff;transition:transform .08s,box-shadow .08s;cursor:pointer}
-  .go svg{width:20px;height:20px}
-  .go:active{transform:translateY(4px)}
-  .super .go{background:linear-gradient(180deg,#7FD3FF 0%,#36AEFF 45%,#1A8DEB 100%);box-shadow:0 6px 0 #0B6FC4,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.55)}
-  .super .go:active{box-shadow:0 2px 0 #0B6FC4}
-  .perfu .go{background:linear-gradient(180deg,#B9F8DE 0%,#5FE3B0 45%,#1FA97A 100%);color:#0B3B2A;box-shadow:0 6px 0 #138A62,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.6)}
-  .perfu .go:active{box-shadow:0 2px 0 #138A62}
-  .tecno .go{background:linear-gradient(180deg,#D3C4FF 0%,#9B7BFF 45%,#6E48F0 100%);box-shadow:0 6px 0 #4B2BC4,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.55)}
-  .jyd .go,.electro .go{background:linear-gradient(180deg,#FFD39A 0%,#FF9A1F 45%,#EE7A00 100%);color:#3A1E00;box-shadow:0 6px 0 #B85E00,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.6)}
-  .indumentaria .go{background:linear-gradient(180deg,#B5F5EC 0%,#2FD3C0 45%,#0C8F81 100%);color:#04332E;box-shadow:0 6px 0 #08665C,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.6)}
-  .indumentaria .go:active{box-shadow:0 2px 0 #08665C}
-  .apple .go{background:linear-gradient(180deg,#FFC2AE 0%,#FF7A59 45%,#E5432A 100%);box-shadow:0 6px 0 #B52E17,0 16px 24px -12px rgba(0,0,0,.45),inset 0 2px 0 rgba(255,255,255,.55)}
-  .apple .go:active{box-shadow:0 2px 0 #B52E17}
-  .badge.nueva{background:#FF7A59;box-shadow:0 3px 0 #B52E17}
-  .app.pronto .go{filter:saturate(.55);opacity:.75;cursor:default;pointer-events:none}
+  .grid{grid-template-columns:repeat(3,1fr)!important;max-width:760px;margin:0 auto;gap:14px!important}
+  .app{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;text-decoration:none;color:var(--ink);background:var(--card);border:2px solid color-mix(in srgb, var(--grape, #FF2E7E) 14%, var(--line));border-bottom-width:5px;border-radius:20px;padding:16px 14px 14px;box-shadow:0 10px 22px -16px rgba(90,20,60,.5);transition:transform .15s, box-shadow .15s}
+  .app:hover{transform:translateY(-3px);box-shadow:0 16px 28px -16px rgba(90,20,60,.6)}
+  .app .mini{display:block;width:100%;max-width:170px;height:auto;overflow:visible;margin:0 auto}
+  .app-sub{font-size:14px;color:var(--muted);font-weight:600;margin-bottom:8px}
+  .app-go{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:15px;color:#fff;background:linear-gradient(#FF6FA5,#FF2E7E);border-bottom:3px solid #C40F52;border-radius:12px;padding:8px 18px}
+  .app-go svg{width:18px;height:18px}
+  .app .nuevo{display:inline-block;vertical-align:1px;margin-left:4px;font-size:11px;font-weight:800;color:#C40F52;background:#FFE3EE;border-radius:999px;padding:3px 9px}
+  @media (max-width:520px){ .grid{grid-template-columns:repeat(2,1fr)!important} .app .mini{max-width:140px} }
   .badge{display:inline-block;vertical-align:3px;margin-left:6px;background:var(--grape);color:#fff;font-family:Figtree,sans-serif;font-weight:800;font-size:12px;border-radius:999px;padding:3px 9px;box-shadow:0 3px 0 var(--grape-deep);transform:rotate(-2deg)}
 
   .why{margin-top:26px;background:var(--card);border-radius:22px;padding:18px 20px;box-shadow:var(--lift);border:2px solid var(--line);display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
@@ -73,7 +60,7 @@
   .why i{font-style:normal;flex:none;width:34px;height:34px;border-radius:50%;background:var(--tag);display:grid;place-items:center;font-size:18px;box-shadow:0 3px 0 var(--tag-deep)}
   .why span{color:var(--muted)}
   /* Ingreso: tarjeta limpia y profesional */
-  .cuenta{background:var(--card);border-radius:20px;padding:18px 20px;box-shadow:0 18px 40px -22px rgba(90,20,60,.45);border:1px solid color-mix(in srgb, var(--line) 70%, transparent);margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .cuenta{max-width:760px;margin-left:auto!important;margin-right:auto!important;background:var(--card);border-radius:20px;padding:18px 20px;box-shadow:0 18px 40px -22px rgba(90,20,60,.45);border:1px solid color-mix(in srgb, var(--line) 70%, transparent);margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
   .cu-ic{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;background:linear-gradient(145deg,#FF6FA5,#D3125F);box-shadow:0 8px 18px -10px rgba(211,18,95,.8)}
   .cu-ic svg{width:24px;height:24px;fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
   .cuenta .tx{flex:1;min-width:200px}
@@ -89,7 +76,7 @@
   .cuenta .msg{flex-basis:100%;display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13.5px;margin:-4px 0 0 64px}
   .cuenta .msg::before{content:"";width:8px;height:8px;border-radius:50%;background:#F2A33A;flex:none}
   @media (max-width:560px){ .cuenta .gbtn{width:100%} .cuenta .msg{margin-left:0} }
-  body.sin-sesion .go{filter:saturate(.75)}
+
   footer{text-align:center;color:var(--muted);font-size:13px;padding:0 16px 30px}
   footer a{color:inherit}
 </style>
@@ -155,17 +142,17 @@
 <script>
   // Para habilitar Tecno Cart o Electro Cart: poné su dirección en "url" (y listo, sale el botón activo).
   const APPS = [
-    { id: 'super', l1: 'Super', grad: 'g-celeste', nombre: 'Super Cart', url: 'https://compras-super-cart.vercel.app',
+    { id: 'super', sub: 'Supermercados', l1: 'Super', grad: 'g-celeste', nombre: 'Super Cart', url: 'https://compras-super-cart.vercel.app',
       txt: 'Tu compra del súper al mejor precio, con un carrito por cada súper.', chips: ['Coto', 'Carrefour', 'ChangoMás', 'Día', 'Jumbo', 'Vea', 'Disco'] },
-    { id: 'perfu', l1: 'Perfu', grad: 'g-menta', nombre: 'Perfu Cart', url: 'https://perfu-cart.vercel.app',
+    { id: 'perfu', sub: 'Perfumería y farmacia', l1: 'Perfu', grad: 'g-menta', nombre: 'Perfu Cart', url: 'https://perfu-cart.vercel.app',
       txt: 'Perfumería, cuidado personal, suplementos y productos de venta libre.', chips: ['Farmacity', 'Farmaonline', 'Simplicity', 'Pigmento', 'GPS Farma'] },
-    { id: 'tecno', l1: 'Tecno', grad: 'g-violeta', nombre: 'Tecno Cart', url: 'https://tecno-cart.vercel.app',
+    { id: 'tecno', sub: 'Tecnología y electro', l1: 'Tecno', grad: 'g-violeta', nombre: 'Tecno Cart', url: 'https://tecno-cart.vercel.app',
       txt: 'Tecnología y electro en una sola app: celulares, notebooks, TV, heladeras, lavarropas y más, con precio de contado y cuotas.', chips: ['Naldo', 'Cetrogar', 'On City', 'Carrefour', 'ChangoMás', 'Jumbo', 'Rodó', 'Samsung', 'Motorola', 'iPoint', 'MacStation'] },
-    { id: 'jyd', l1: 'Juguetes', grad: 'g-naranja', nombre: 'Juguetes Cart', url: 'https://juguetes-cart-y-deporte-cart.vercel.app/juguetes', nueva: true,
+    { id: 'jyd', sub: 'Juguetes y regalos', l1: 'Juguetes', grad: 'g-naranja', nombre: 'Juguetes Cart', url: 'https://juguetes-cart-y-deporte-cart.vercel.app/juguetes', nueva: true,
       txt: 'Regalos de Navidad al mejor precio: LEGO, Barbie, Hot Wheels, juegos de mesa y más.', chips: ['Cebra', 'Kinderland', 'Brickstore (LEGO)'] },
-    { id: 'indumentaria', l1: 'Indumentaria', grad: 'g-verde', nombre: 'Indumentaria Cart', url: 'https://juguetes-cart-y-deporte-cart.vercel.app/indumentaria', nueva: true,
+    { id: 'indumentaria', sub: 'Zapatillas y ropa', l1: 'Indumentaria', grad: 'g-verde', nombre: 'Indumentaria Cart', url: 'https://juguetes-cart-y-deporte-cart.vercel.app/indumentaria', nueva: true,
       txt: 'Zapatillas, botines y ropa deportiva: el mismo modelo en todas las tiendas, para comprarlo donde sale menos.', chips: ['Dexter', 'Moov', 'Stock Center', 'Sporting', 'Grid'] },
-    { id: 'apple', l1: 'Apple', grad: 'g-plata', nombre: 'Apple Cart', url: 'https://tecno-cart.vercel.app/apple', nueva: true,
+    { id: 'apple', sub: 'iPhone, Mac y más', l1: 'Apple', grad: 'g-plata', nombre: 'Apple Cart', url: 'https://tecno-cart.vercel.app/apple', nueva: true,
       txt: 'iPhone, iPad, Mac, AirPods y Apple Watch: el mismo equipo en todas las tiendas, para comprarlo donde sale menos.', chips: ['iPhone', 'iPad', 'MacBook', 'AirPods', 'Apple Watch'] },
   ];
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -178,14 +165,13 @@
       + `<text x="8" y="98" rotate="-7 4 -5 6 -3 5 -4"${letras.length > 9 ? ' font-size="72" textLength="446" lengthAdjust="spacingAndGlyphs"' : ''}>${t1}</text>`
       + `<text x="70" y="204" rotate="6 -4 5 -6">${a.l2 ? Array.from(a.l2).map((c, i) => `<tspan${i ? ' dx="7"' : ''} dy="${[0, 5, -6, 4, -5][i] || 0}">${esc(c)}</tspan>`).join('') : '<tspan>C</tspan><tspan dx="9" dy="5">a</tspan><tspan dx="9" dy="-6">r</tspan><tspan dx="9" dy="4">t</tspan>'}</text><g transform="translate(334 108) scale(1.7)" fill="none" stroke="url(#${a.grad})" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8h10l8 34h34l7-24H16"/><path d="M22 30h33" stroke-width="5" opacity=".7"/><circle cx="25" cy="53" r="5" fill="url(#${a.grad})"/><circle cx="49" cy="53" r="5" fill="url(#${a.grad})"/></g></g></g></svg>`;
   };
+  // Tarjetas chicas y parejas: logo, una línea y "Entrar" (toda la tarjeta es el link). El detalle de cada app pasa en su cartel de arriba.
   document.getElementById('apps').innerHTML = APPS.map(a => `
-    <article class="app ${a.id}${a.url ? '' : ' pronto'}">
+    <a class="app ${a.id}" href="${esc(a.url)}" aria-label="Entrar a ${esc(a.nombre)}">
       ${logo(a)}
-      <h2>${esc(a.nombre)}${a.url ? (a.nueva ? ' <span class="badge nueva">Nuevo</span>' : '') : ' <span class="badge">Próximamente</span>'}</h2>
-      <p>${esc(a.txt)}</p>
-      <div class="chips">${a.chips.map(c => `<span>${esc(c)}</span>`).join('')}</div>
-      ${a.url ? `<a class="go" href="${esc(a.url)}" aria-label="Entrar a ${esc(a.nombre)}">Entrar ${flecha}</a>` : `<span class="go" aria-disabled="true">Muy pronto</span>`}
-    </article>`).join('');
+      <span class="app-sub">${esc(a.sub)}${a.nueva ? ' <span class="nuevo">Nuevo</span>' : ''}</span>
+      <span class="app-go">Entrar ${flecha}</span>
+    </a>`).join('');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.min.js"></script>
 <script>
@@ -235,7 +221,7 @@
     }
     // Las tarjetas de las apps: con sesión, llevan la cuenta; sin sesión, primero se ingresa y después se va a la app
     document.getElementById('apps').addEventListener('click', e => {
-      const a = e.target.closest('a.go'); if (!a) return;
+      const a = e.target.closest('a.app'); if (!a) return;
       e.preventDefault();
       if (user) location.href = conCuenta(a.href, user.email); else entrar(a.href);
     });
