@@ -7,6 +7,7 @@
     { id: 'inicio', nombre: 'Tus Carts', sub: 'Todas las apps', url: 'https://tus-carts.vercel.app', color: '#5B5BD6', ico: '🏠' },
     { id: 'super', nombre: 'Super Cart', sub: 'Coto, Carrefour, ChangoMás, Día', url: 'https://compras-super-cart.vercel.app', color: '#22A55B', ico: '🛒' },
     { id: 'perfu', nombre: 'Perfu Cart', sub: 'Perfumería y farmacia', url: 'https://perfu-cart.vercel.app', color: '#E2367F', ico: '💄' },
+    { id: 'belleza', nombre: 'Belleza Cart', sub: 'Cuidado y belleza · Andrómaco', url: 'https://perfu-cart.vercel.app/belleza', color: '#B43FC0', ico: '' },
     { id: 'tecno', nombre: 'Tecno Cart', sub: 'Tecnología y electro', url: 'https://tecno-cart.vercel.app', color: '#7B5CFF', ico: '📺' },
     { id: 'apple', nombre: 'Mundo Apple', sub: 'iPhone, iPad, Mac, AirPods', url: 'https://tecno-cart.vercel.app/apple', color: '#F0603F', ico: '' },
     { id: 'juguetes', nombre: 'Juguetes Cart', sub: 'Cebra, Kinderland y LEGO', url: JYD + '/juguetes', color: '#F28C00', ico: '🧸' },
@@ -19,7 +20,7 @@
     const h = location.hostname, p = location.pathname, qs = new URLSearchParams(location.search);
     const forzado = document.currentScript && document.currentScript.dataset.app;
     if (forzado) return forzado;
-    if (/perfu-cart/.test(h)) return 'perfu';
+    if (/perfu-cart/.test(h)) return /^\/belleza\/?$/.test(p) ? 'belleza' : 'perfu';
     if (/tecno-cart/.test(h)) return (/^\/apple\/?$/.test(p) || qs.get('apple') === '1') ? 'apple' : 'tecno';
     if (/juguetes-cart/.test(h)) return (/^\/indumentaria\/?$/.test(p) || qs.get('seccion') === 'deporte') ? 'indumentaria' : 'juguetes';
     if (/tus-carts/.test(h)) return 'inicio';
@@ -70,6 +71,7 @@
     super: '<path d="M2.5 4h2.6l2.3 10.5a1.6 1.6 0 0 0 1.6 1.3h8.3a1.6 1.6 0 0 0 1.6-1.2L20.8 7.5H6"/><path d="M8.6 10.8h11.1M10.5 7.5l.8 8.3M14.4 7.5l-.3 8.3M18.2 7.5l-1.3 8.3"/><circle cx="9.8" cy="19.6" r="1.5"/><circle cx="17" cy="19.6" r="1.5"/>',
     perfu: '<path d="M10 3.5h4v3h-4z"/><path d="M12 3.5V2"/><path d="M14 4.5h2.5"/><path d="M8.5 6.5h7"/><rect x="5.5" y="8.5" width="13" height="12.5" rx="3"/><path d="M9 13.5c1.8-1.6 4.2-1.6 6 0"/>',
     tecno: '<rect x="2.5" y="4" width="19" height="12.5" rx="1.8"/><path d="M9 20.5h6M12 16.5v4"/><path d="M5.5 7v6.5"/>',
+    belleza: '<path d="M12 3l1.6 3.9L17.5 8.5l-3.9 1.6L12 14l-1.6-3.9L6.5 8.5l3.9-1.6z"/><path d="M18.5 14l.8 1.9 1.9.8-1.9.8-.8 1.9-.8-1.9-1.9-.8 1.9-.8z"/><path d="M6 15.5l.6 1.4 1.4.6-1.4.6L6 19.5l-.6-1.4L4 17.5l1.4-.6z"/>',
     apple: '<rect x="6.5" y="2.5" width="11" height="19" rx="2.6"/><path d="M10.5 4.6h3"/><path d="M11 18.8h2"/>',
     juguetes: '<circle cx="7" cy="6" r="2.4"/><circle cx="17" cy="6" r="2.4"/><circle cx="12" cy="10" r="5"/><path d="M10.4 9.3h.01M13.6 9.3h.01"/><path d="M10.8 12.1c.7.6 1.7.6 2.4 0"/><path d="M8.2 13.6c-2.4 1.2-3.7 3.4-3.7 5.9h15c0-2.5-1.3-4.7-3.7-5.9"/>',
     indumentaria: '<path d="M2.5 16.5c0-3 .8-6.5 2.2-8.5l2.6 1.6c1.2.8 2.6.4 3.3-.8l.5-.8c3 3.6 6.6 5.3 10.4 6 .5 1 .5 2.3 0 3.5H4.3c-1 0-1.8-.4-1.8-1z"/><path d="M2.5 15.5h19"/><path d="M10 10.8l1.3-1M12.4 12.3l1.3-1M14.9 13.5l1.2-1"/><path d="M5 19.5h15"/>'
